@@ -50,6 +50,10 @@ module GobiertoAdmin
             check "Gobierto Development"
           end
 
+          within ".auth-module-check-boxes" do
+            check "Null Strategy"
+          end
+
           within ".widget_save" do
             choose "Published"
           end
@@ -79,6 +83,10 @@ module GobiertoAdmin
 
           within ".site-module-check-boxes" do
             assert has_checked_field?("Gobierto Development")
+          end
+
+          within ".auth-module-check-boxes" do
+            assert has_checked_field?("Null Strategy")
           end
 
           within ".widget_save" do
