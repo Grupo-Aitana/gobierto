@@ -113,12 +113,9 @@ module GobiertoPlans
                 assert has_selector?("div", text: (projects.last.progress / 100).to_s)
 
                 find("td", text: projects.first.name).click
-              end
-            end
 
-            within "section.level_3.cat_3" do
-              find("h3", text: projects.first.name)
-              assert has_content?(projects.first.status)
+                assert has_content?(projects.first.status)
+              end
             end
           end
         end
@@ -149,8 +146,9 @@ module GobiertoPlans
             end
           end
 
-          plan.configuration_data["show_table_header"] = true
-          plan.save
+          hash = plan.configuration_data
+          hash["show_table_header"] = true
+          plan.update_attribute(:configuration_data, JSON.pretty_generate(hash))
 
           visit @path
 
@@ -181,6 +179,10 @@ module GobiertoPlans
         with_current_site(site) do
           visit @path
 
+          hash = plan.configuration_data
+          hash["open_node"] = true
+          plan.update_attribute(:configuration_data, JSON.pretty_generate(hash))
+
           within "section.level_0" do
             within "div.node-root.cat_3" do
               find("a").trigger("click")
@@ -203,14 +205,7 @@ module GobiertoPlans
               end
             end
 
-            within "section.level_3.cat_3" do
-              assert has_selector?("div.node-breadcrumb", count: 3)
-
-              all("div.node-breadcrumb")[0].click
-            end
-
-            refute has_selector?("section.level_2.cat_3")
-            refute has_selector?("section.level_3.cat_3")
+            all("div.node-breadcrumb")[0].click
 
             within ".lines-header" do
               assert has_content?("1 line of action")
@@ -246,8 +241,9 @@ module GobiertoPlans
               end
             end
 
-            plan.configuration_data["open_node"] = true
-            plan.save
+            hash = plan.configuration_data
+            hash["open_node"] = true
+            plan.update_attribute(:configuration_data, JSON.pretty_generate(hash))
 
             visit @path
 

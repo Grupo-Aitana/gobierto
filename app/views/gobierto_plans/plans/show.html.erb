@@ -76,21 +76,21 @@
               <div><%= t(".percentage_progress") %></div>
             </div>
 
-          <ul class="lines-list">
-            <li class="mb2" v-for="(model, index) in activeNode.children">
-              <node-list :model="model" :key="model.id" :level="levelKeys" @selection="setSelection"></node-list>
-            </li>
-          </ul>
-        </section>
+            <ul class="lines-list">
+              <li class="mb2" v-for="(model, index) in activeNode.children">
+                <node-list :model="model" :key="model.id" :level="levelKeys" @selection="setSelection"></node-list>
+              </li>
+            </ul>
+          </section>
 
-        <section class="level_2" v-if="isOpen(2)" :class="['cat_' + color() ]">
+          <section class="level_2" v-if="isOpen(2)" :class="['cat_' + color() ]">
 
-          <div class="node-breadcrumb mb2">
-            <a data-turbolinks="false" @click.stop="setParent">
-              <i class="fa fa-caret-left"></i>
-              <%= t(".see_all") %>&nbsp;{{ (getParent().attributes || {}).title | translate }}
-            </a>
-          </div>
+            <div class="node-breadcrumb mb2">
+              <a data-turbolinks="false" @click.stop="setParent">
+                <i class="fa fa-caret-left"></i>
+                <%= t(".see_all") %>&nbsp;{{ (getParent().attributes || {}).title | translate }}
+              </a>
+            </div>
 
             <div class="node-action-line">
 
@@ -103,43 +103,38 @@
                   <div>{{ (activeNode.attributes || {}).progress || 0 | percent }}</div>
                 </div>
 
-              <ul class="action-line--list">
-                <li v-for="(model, index) in activeNode.children">
-                  <node-list :model="model" :key="model.id" :level="levelKeys" @toggle="toggle(index)"></node-list>
-                  <transition name="slide-fade">
-                    <table-view :model="model" :key="model.id" :header="showTableHeader" :open="openNode" @selection="setSelection" v-if="showTable[index]"></table-view>
-                  </transition>
-                </li>
-              </ul>
-            </div>
-        </section>
+                <ul class="action-line--list">
+                  <li v-for="(model, index) in activeNode.children">
+                    <node-list :model="model" :key="model.id" :level="levelKeys" @toggle="toggle(index)"></node-list>
+                    <transition name="slide-fade">
+                      <table-view :model="model" :key="model.id" :header="showTableHeader" :open="openNode" @selection="setSelection" v-if="showTable[index]"></table-view>
+                    </transition>
+                  </li>
+                </ul>
+              </div>
+          </section>
 
           <section class="level_3" v-if="isOpen(3)" :class="['cat_' + color() ]">
 
-          <template v-for="level in activeNode.level">
-            <div class="node-breadcrumb" :style="{ marginLeft: (level - 1) + 'em', marginBottom: '0.5em' }">
-              <a data-turbolinks="false" @click.stop="setParent(level)">
-                <i class="fa fa-caret-left"></i>
-                {{ (getParent(level).attributes || {}).title | translate }}
-              </a>
-            </div>
-            <br>
-          </template>
-
-          <div class="node-action-line" :style="{ marginLeft: activeNode.level + 'em' }">
-              <div class="action-line--header node-list cat--negative">
-                <h3>{{ (activeNode.attributes || {}).title | translate }}</h3>
+            <template v-for="level in activeNode.level">
+              <div class="node-breadcrumb" :style="{ marginLeft: (level - 1) + 'em', marginBottom: '0.5em' }">
+                <a data-turbolinks="false" @click.stop="setParent(level)">
+                  <i class="fa fa-caret-left"></i>
+                  {{ (getParent(level).attributes || {}).title | translate }}
+                </a>
               </div>
+              <br>
+            </template>
 
-              <div class="node-project-detail">
-                <div class="project-optional">
-                  <div class="row" v-for="(value, key) in availableOpts">
-                    <template v-if="typeOf(value) !== 'object'">
-                      <div class="optional-title">{{ optionKeys[key] | translate }}</div>
-                      <div class="optional-desc">{{ value }}</div>
-                    </template>
-                    <template v-else>
-                      <div class="optional-container">
+            <div class="node-action-line" :style="{ marginLeft: activeNode.level + 'em' }">
+                <div class="action-line--header node-list cat--negative">
+                  <h3>{{ (activeNode.attributes || {}).title | translate }}</h3>
+                </div>
+
+                <div class="node-project-detail">
+                  <div class="project-optional">
+                    <div class="row" v-for="(value, key) in availableOpts">
+                      <template v-if="typeOf(value) !== 'object'">
                         <div class="optional-title">{{ optionKeys[key] | translate }}</div>
                         <div class="optional-desc">{{ value }}</div>
                       </template>
@@ -186,9 +181,11 @@
 
         </div>
 
-      </div>
-
     <% end %>
+
+    </div>
+
+    </div>
 
   </div>
 </div>
