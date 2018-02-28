@@ -69,9 +69,9 @@
             </div>
           </section>
 
-          <section class="level_1" v-if="isOpen(1)" :class="['cat_' + color() ]">
-            <div class="lines-header">
-              <div><%= level_name_pluralize(@plan.categories.where(level: 1).size, @plan.configuration_data["level1"]) %></div>
+        <section class="level_1" v-if="isOpen(1)" :class="['cat_' + color() ]">
+          <div class="lines-header">
+            <div>{{ (activeNode.children || []).length }} {{ getLabel(activeNode.level, (activeNode.children || []).length) | translate }}</div>
 
               <div><%= t(".percentage_progress") %></div>
             </div>
@@ -102,6 +102,9 @@
                   <div><%= level_name_pluralize(@plan.categories.where(level: 2).size, @plan.configuration_data["level2"]) %></div>
                   <div>{{ (activeNode.attributes || {}).progress || 0 | percent }}</div>
                 </div>
+                <div>{{ (activeNode.children || []).length }} {{ getLabel(activeNode.level, (activeNode.children || []).length) | translate }}</div>
+                <div>{{ (activeNode.attributes || {}).progress || 0 | percent }}</div>
+              </div>
 
                 <ul class="action-line--list">
                   <li v-for="(model, index) in activeNode.children">
@@ -228,7 +231,7 @@
       <th><%= t(".progress") %></th>
     </thead>
     <tbody>
-      <tr v-for="row in model.children" @click.stop="getProject(row)">
+      <tr v-for="row in model.children" @click.stop="getProject(row)" :style="{ cursor: (!open) ? 'auto' : '' }">
         <td>{{ row.attributes.title | translate }}</td>
         <td>{{ row.attributes.starts_at | date }}</td>
         <td>{{ row.attributes.status | translate }}</td>

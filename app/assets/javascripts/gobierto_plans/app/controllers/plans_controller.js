@@ -230,6 +230,11 @@ this.GobiertoPlans.PlansController = (function() {
           toggle: function(i) {
             Vue.set(this.showTable, i, !(this.showTable[i]));
           },
+          getLabel: function(level, number_of_elements) {
+            var l = (_.keys(this.levelKeys).length === (level + 1)) ? level : (level + 1);
+            var key = this.levelKeys["level" + l];
+            return (number_of_elements == 1 ? key["one"] : key["other"]);
+          },
           getParent: function() {
             // Initialize args
             var breakpoint = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
