@@ -6,7 +6,10 @@
 <h1><%= t('.title') %></h1>
 
 <div class="admin_tools right">
-  <%= link_to t(".types"), admin_plans_plan_types_path, class: "button" %>
+  <%= link_to admin_plans_plan_types_path do %>
+    <i class="fa fa-cog"></i>
+    <%= t(".types") %>
+  <% end %>
   <%= link_to t(".new"), new_admin_plans_plan_path, class: "button" %>
 </div>
 
@@ -31,10 +34,10 @@
         <% end %>
       </td>
       <td>
-        <%= link_to plan.plan_type.name, edit_admin_plans_plan_path(plan) %>
+        <%= plan.plan_type.name %>
       </td>
       <td>
-        <%= plan.title %>
+        <%= link_to plan.title, edit_admin_plans_plan_path(plan) %>
       </td>
       <td>
         <%= plan.node_size %>
@@ -48,7 +51,7 @@
         <%= t(".visibility_level.#{plan.visibility_level}") %>
       </td>
       <td>
-        <%= link_to gobierto_plans_plan_preview_url(plan, host: current_site.domain), target: "_blank", class: "view_item" do %>
+        <%= link_to gobierto_plans_plan_type_preview_url(plan, host: current_site.domain), target: "_blank", class: "view_item" do %>
           <i class="fa fa-eye"></i>
           <%= t(".view_plan") %>
         <% end %>
