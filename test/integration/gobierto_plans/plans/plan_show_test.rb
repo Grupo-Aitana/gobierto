@@ -171,7 +171,7 @@ module GobiertoPlans
             within "section.level_2.cat_3" do
               within "ul.action-line--list" do
                 find("h3", text: actions.first.name).click
-                assert has_selector?("thead", count: 1)
+                refute has_selector?("thead", count: 1)
               end
             end
           end
