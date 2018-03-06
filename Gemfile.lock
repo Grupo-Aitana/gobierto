@@ -99,7 +99,7 @@ GEM
     case_transform (0.2)
       activesupport
     cliver (0.3.2)
-    cloudinary (1.9.0)
+    cloudinary (1.9.1)
       aws_cf_signer
       rest-client
     cocoon (1.2.11)
@@ -114,7 +114,7 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.3)
-    d3-rails (4.10.2)
+    d3-rails (4.13.0)
       railties (>= 3.1)
     dalli (2.7.6)
     declarative (0.0.10)
@@ -305,7 +305,7 @@ GEM
       websocket-driver (>= 0.2.0)
     powerpack (0.1.1)
     public_suffix (3.0.2)
-    puma (3.11.2)
+    puma (3.11.3)
     rack (2.0.4)
     rack-protection (2.0.1)
       rack
