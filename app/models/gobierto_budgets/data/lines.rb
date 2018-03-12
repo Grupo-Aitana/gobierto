@@ -79,7 +79,7 @@ module GobiertoBudgets
 
         result = []
         data.sort_by{|k,_| k }.each do |year, v|
-          if year <= GobiertoBudgets::SearchEngineConfiguration::Year.last
+          if year <= GobiertoBudgets::SearchEngineConfiguration::Year.last(true)
             result.push({
               date: year.to_s,
               value: v,
@@ -137,7 +137,7 @@ module GobiertoBudgets
 
         result = []
         data.sort_by{|k,_| k }.each do |year, v|
-          if year <= GobiertoBudgets::SearchEngineConfiguration::Year.last
+          if year <= GobiertoBudgets::SearchEngineConfiguration::Year.last(true)
             result.push({
               date: year.to_s,
               value: v,
@@ -194,7 +194,7 @@ module GobiertoBudgets
 
         result = []
         data.sort_by{|k,_| k }.each do |year, v|
-          if year <= GobiertoBudgets::SearchEngineConfiguration::Year.last
+          if year <= GobiertoBudgets::SearchEngineConfiguration::Year.last(true)
             result.push({
               date: year.to_s,
               value: v,

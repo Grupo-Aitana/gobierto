@@ -1,7 +1,10 @@
 module GobiertoBudgets
   class SearchEngineConfiguration
     class Year
-      def self.last
+      def self.last(force = false)
+        last_year_with_data = 2017
+        return last_year_with_data if force
+
         Date.today.year.downto(first) do |year|
           if GobiertoCore::CurrentScope.current_site.present?
             if GobiertoBudgets::BudgetLine.any_data?(site: GobiertoCore::CurrentScope.current_site, index: GobiertoBudgets::SearchEngineConfiguration::BudgetLine.index_forecast, year: year)
@@ -11,7 +14,7 @@ module GobiertoBudgets
             end
           end
         end
-        2017
+        last_year_with_data
       end
 
       def self.first; 2010 end
