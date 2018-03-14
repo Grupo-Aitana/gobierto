@@ -1,12 +1,61 @@
 //= require ./execution
 //= require_directory ./components/
 //= require_directory ./visualizations/
+//= require_directory ./cards/
 //= require_directory ./lib/
 //= require d3-jetpack
 //= require ./app/init
 //= require_tree ./app
 
 $(document).on('turbolinks:load', function() {
+
+  var grossSavingCard = new GrossSavingCard('.gross_saving_card', window.populateData.municipalityId);
+  grossSavingCard.render();
+
+  var netSavingCard = new NetSavingCard('.net_saving_card', window.populateData.municipalityId);
+  netSavingCard.render();
+
+  var taxAutonomyCard = new TaxAutonomyCard('.tax_autonomy_card', window.populateData.municipalityId);
+  taxAutonomyCard.render();
+
+  var selfFinancingCapacityCard = new SelfFinancingCapacityCard('.self_financing_capacity_card', window.populateData.municipalityId);
+  selfFinancingCapacityCard.render();
+
+  var financialChargeCard = new FinancialChargeCard('.financial_charge_card', window.populateData.municipalityId);
+  financialChargeCard.render();
+
+  var liabilityCostCard = new LiabilityCostCard('.liability_cost_card', window.populateData.municipalityId);
+  liabilityCostCard.render();
+
+  var investmentFinancingCard = new InvestmentFinancingCard('.investment_financing_card', window.populateData.municipalityId);
+  investmentFinancingCard.render();
+
+  var grossSavingsRateCard = new GrossSavingsRateCard('.gross_savings_rate_card', window.populateData.municipalityId);
+  grossSavingsRateCard.render();
+
+  var netSavingsRateCard = new NetSavingsRateCard('.net_savings_rate_card', window.populateData.municipalityId);
+  netSavingsRateCard.render();
+
+  var debtLevelCard = new DebtLevelCard('.debt_level_card', window.populateData.municipalityId);
+  debtLevelCard.render();
+
+  var perCapitaInvestmentCard = new PerCapitaInvestmentCard('.per_capita_investment_card', window.populateData.municipalityId);
+  perCapitaInvestmentCard.render();
+
+  var perCapitaTaxBurdenCard = new PerCapitaTaxBurdenCard('.per_capita_tax_burden_card', window.populateData.municipalityId);
+  perCapitaTaxBurdenCard.render();
+
+  var municipalBudgetLineCard = new MunicipalBudgetLineCard('.municipal_budget_line_card', window.populateData.municipalityId);
+  municipalBudgetLineCard.render();
+
+  var totalMunicipalBudgetsCard = new TotalMunicipalBudgetsCard('.total_municipal_budgets_card', window.populateData.municipalityId);
+  totalMunicipalBudgetsCard.render();
+
+  var financialRiskCard = new FinancialRiskCard('.financial_risk_card', window.populateData.municipalityId);
+  financialRiskCard.render();
+
+  var expenditureRigidityCard = new ExpenditureRigidityCard('.expenditure_rigidity_card', window.populateData.municipalityId);
+  expenditureRigidityCard.render();
 
   if(isDesktop()) {
     rebindAll();
