@@ -116,7 +116,7 @@ GEM
     crass (1.0.3)
     d3-rails (4.13.0)
       railties (>= 3.1)
-    dalli (2.7.6)
+    dalli (2.7.7)
     declarative (0.0.10)
     declarative-option (0.1.0)
     docile (1.1.5)
@@ -439,7 +439,7 @@ GEM
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uber (0.1.0)
-    uglifier (4.1.7)
+    uglifier (4.1.8)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
