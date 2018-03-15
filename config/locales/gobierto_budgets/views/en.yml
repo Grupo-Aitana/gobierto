@@ -76,8 +76,6 @@ en:
           title: Investment financing
         liability_cost:
           title: Liability cost
-        municipal_budget_line:
-          title: Municipal budget line
         net_saving:
           title: Net saving
         net_savings_rate:
@@ -90,8 +88,6 @@ en:
           title: Self financing capacity
         tax_autonomy:
           title: Tax autonomy
-        total_municipal_budgets:
-          title: Total municipal budgets
       guide:
         budget_execution: Budget execution
         budget_execution_p1_html: 'Approving a budget does not mean that it is written
@@ -328,6 +324,9 @@ en:
         total_expenses: Total expenses
         total_expenses_tooltip: Starting budget
         visualize: Visualize expenses per inhabitant or the total
+      meta:
+        time: " in "
+        where: 'At '
     budgets_elaboration:
       index:
         at_a_glance: At a glance
