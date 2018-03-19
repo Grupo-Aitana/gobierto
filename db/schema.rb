@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_05_102456) do
+ActiveRecord::Schema.define(version: 2018_03_19_122227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -181,11 +181,6 @@ ActiveRecord::Schema.define(version: 2018_03_05_102456) do
     t.datetime "updated_at", null: false
     t.index ["site_id", "name"], name: "index_custom_user_fields_on_site_id_and_name", unique: true
     t.index ["site_id"], name: "index_custom_user_fields_on_site_id"
-  end
-
-  create_table "data_migrations", id: false, force: :cascade do |t|
-    t.string "version", null: false
-    t.index ["version"], name: "unique_data_migrations", unique: true
   end
 
   create_table "ga_attachings", force: :cascade do |t|
@@ -760,6 +755,7 @@ ActiveRecord::Schema.define(version: 2018_03_05_102456) do
     t.integer "visibility_level", default: 0, null: false
     t.text "css"
     t.datetime "archived_at"
+    t.jsonb "footer_translations"
     t.index ["archived_at"], name: "index_gplan_plans_on_archived_at"
     t.index ["plan_type_id"], name: "index_gplan_plans_on_plan_type_id"
     t.index ["site_id"], name: "index_gplan_plans_on_site_id"
