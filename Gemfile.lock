@@ -63,13 +63,13 @@ GEM
     ansi (1.5.0)
     arel (9.0.0)
     ast (2.4.0)
-    aws-sdk (2.11.19)
-      aws-sdk-resources (= 2.11.19)
-    aws-sdk-core (2.11.19)
+    aws-sdk (2.11.17)
+      aws-sdk-resources (= 2.11.17)
+    aws-sdk-core (2.11.17)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.11.19)
-      aws-sdk-core (= 2.11.19)
+    aws-sdk-resources (2.11.17)
+      aws-sdk-core (= 2.11.17)
     aws-ses (0.6.0)
       builder
       mail (> 2.2.5)
@@ -125,10 +125,10 @@ GEM
     easy_translate (0.5.1)
       thread
       thread_safe
-    elasticsearch (6.0.1)
-      elasticsearch-api (= 6.0.1)
-      elasticsearch-transport (= 6.0.1)
-    elasticsearch-api (6.0.1)
+    elasticsearch (6.0.2)
+      elasticsearch-api (= 6.0.2)
+      elasticsearch-transport (= 6.0.2)
+    elasticsearch-api (6.0.2)
       multi_json
     elasticsearch-extensions (0.0.27)
       ansi
@@ -136,7 +136,7 @@ GEM
       oj
       patron
       ruby-prof
-    elasticsearch-transport (6.0.1)
+    elasticsearch-transport (6.0.2)
       faraday
       multi_json
     erubi (1.7.1)
@@ -237,7 +237,7 @@ GEM
     logging (2.2.2)
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
-    loofah (2.2.1)
+    loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
@@ -327,8 +327,8 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.3)
-      loofah (~> 2.0)
+    rails-html-sanitizer (1.0.4)
+      loofah (~> 2.2, >= 2.2.2)
     railties (5.2.0.rc2)
       actionpack (= 5.2.0.rc2)
       activesupport (= 5.2.0.rc2)
