@@ -26,7 +26,7 @@ module GobiertoBudgets
                                               content_type: "application/json; charset=utf-8").upload!
       end
 
-      def get_url
+      def file_url
         file = GobiertoCommon::FileUploadService.new(file_name: self.class.file_name_for(site.organization_id))
         file.uploaded_file_exists? && file.call
       end

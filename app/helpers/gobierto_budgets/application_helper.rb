@@ -130,7 +130,7 @@ module GobiertoBudgets
     end
 
     def bubbles_data_path(site)
-      GobiertoBudgets::Data::Bubbles.new(current_site).get_url
+      GobiertoBudgets::Data::Bubbles.new(current_site).file_url
     end
 
     def budget_line_breadcrumb(budget_line, year, kind)
