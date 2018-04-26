@@ -7,6 +7,9 @@ namespace :gobierto_budgets do
       BUDGETS_INDEXES = [GobiertoBudgets::SearchEngineConfiguration::BudgetLine.index_forecast, GobiertoBudgets::SearchEngineConfiguration::BudgetLine.index_executed, GobiertoBudgets::SearchEngineConfiguration::BudgetLine.index_executed_series].freeze
       BUDGETS_TYPES = GobiertoBudgets::BudgetArea.all_areas_names
 
+      create_categories_index
+      create_data_index
+
       create_categories_mapping
       create_data_mapping
 
@@ -145,6 +148,22 @@ namespace :gobierto_budgets do
       YAML.safe_load(File.read(File.expand_path("categories.yml", __dir__))).map do |_, category|
         yield(category)
       end
+    end
+
+    def create_categories_index
+      index = GobiertoBudgets::SearchEngineConfiguration::BudgetCategories.index
+      if GobiertoBudgets::SearchEngine.client.indices.exists? index: index
+        GobiertoBudgets::SearchEngine.client.indices.delete index: index
+      end
+      GobiertoBudgets::SearchEngine.client.indices.create index: index
+    end
+
+    def create_data_index
+      index = GobiertoBudgets::SearchEngineConfiguration::Data.index
+      if GobiertoBudgets::SearchEngine.client.indices.exists? index: index
+        GobiertoBudgets::SearchEngine.client.indices.delete index: index
+      end
+      GobiertoBudgets::SearchEngine.client.indices.create index: index
     end
 
     def create_categories_mapping
