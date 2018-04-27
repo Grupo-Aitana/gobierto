@@ -9,7 +9,7 @@ module LiquidHelper
     end
 
     template = to_liquid(template_content)
-    sanitize template.render
+    template.render.html_safe
   end
 
   def to_liquid(template_content)
