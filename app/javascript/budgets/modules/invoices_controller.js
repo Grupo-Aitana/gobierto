@@ -67,6 +67,19 @@ window.GobiertoBudgets.InvoicesController = (function() {
 
         data = _.filter(csv, _callback(filter));
 
+        if (!data.length) {
+          alert(I18n.t('gobierto_budgets.invoices.show.filter_empty'));
+
+          // if there's no data, get all available filters and trigger a new one
+          let filters = [];
+          $('#invoices-filters button[data-toggle]').each(function() { filters.push($(this).attr('data-toggle')) });
+          let previousFilter = (filters.indexOf(filter) > 0) ? filters[filters.indexOf(filter) - 1] : alert('Any filter has data.')
+
+          // trigger another filter automatically
+          $('#invoices-filters button[data-toggle=' + previousFilter + ']').trigger('click');
+          return
+        }
+
         _r = {
           domain: [501, 1001, 5001, 10001, 15001],
           range: [0, 1, 2, 3, 4, 5]
