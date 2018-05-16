@@ -12,9 +12,9 @@ gem "jbuilder", "~> 2.5"
 gem "mechanize"
 gem "meta-tags"
 gem "paper_trail"
-gem "paranoia"
+gem "paranoia", "~> 2.4.0"
 gem "pg", "~> 0.19"
-gem "rails", "~> 5.2.0.rc2"
+gem "rails", "~> 5.2.0"
 gem "redcarpet", require: true
 gem "responders"
 gem "rollbar"
@@ -43,6 +43,7 @@ gem "elasticsearch-extensions"
 
 # Background processing
 gem "sidekiq", "~> 5.1.0"
+gem "sidekiq-monitor-stats"
 
 # AWS SDK client
 gem "aws-sdk", "~> 2.6", require: false
@@ -89,9 +90,8 @@ gem "cloudinary"
 group :development, :test do
   gem "byebug", platform: :mri
   gem "i18n-tasks"
-  gem "listen"
   gem "spring"
-  gem "spring-watcher-listen", "~> 2.0.0"
+  gem "puma"
 end
 
 group :test do
@@ -113,6 +113,8 @@ group :test do
 end
 
 group :development do
-  gem "puma"
   gem "rubocop"
+  gem "listen"
+  gem "spring-watcher-listen", "~> 2.0.0"
+  gem "foreman"
 end

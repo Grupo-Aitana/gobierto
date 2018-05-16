@@ -42,7 +42,7 @@ module GobiertoAdmin
       def setup
         super
         clear_calendar_configurations
-        @person_events_path = admin_people_person_events_path(person)
+        @person_events_path = admin_calendars_events_path(collection_id: person.events_collection.id)
 
         ## Mocks
         calendar1 = mock
@@ -293,6 +293,27 @@ module GobiertoAdmin
               assert_nil event.title_translations[locale.to_s]
               assert_nil event.description_translations[locale.to_s]
             end
+          end
+        end
+      end
+
+      def test_sync_calendars_errors
+        configure_ibm_notes_calendar_integration(
+          collection: person.calendar,
+          data: ibm_notes_configuration
+        )
+
+        ::GobiertoPeople::IbmNotes::CalendarIntegration.any_instance
+                                                       .stubs(:sync!)
+                                                       .raises(::GobiertoCalendars::CalendarIntegration::Error)
+
+        with_signed_in_admin(admin) do
+          with_current_site(site) do
+            visit edit_admin_calendars_configuration_path(person.calendar)
+
+            click_link "Sync now"
+
+            assert has_content? "There has been a problem synchronizing the calendar"
           end
         end
       end

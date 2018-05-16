@@ -3,9 +3,9 @@
 
     <div class="pure-u-1 pure-u-md-3-5 sub_filter">
       <ul>
-        <li class="all-events-filter active" data-scope="all">
-          <%= link_to t(".all_events"), admin_calendars_events_path(collection_id: collection), remote: true %>
-          (<%= @events_presenter.events_count %>)
+        <li class="upcoming-events-filter active" data-scope="upcoming">
+          <%= link_to t(".upcoming_events"), admin_calendars_events_path(collection_id: collection), remote: true %>
+          (<%= @events_presenter.upcoming_events_count %>)
         </li>
         <li class="pending-events-filter <%= class_if("warn", @events_presenter.pending_events_count > 0) %>" data-scope="pending">
           <%= link_to t(".pending_events"), admin_calendars_events_path(collection_id: collection, scope: :pending), remote: true %>
@@ -63,7 +63,7 @@
             <% end %>
           </td>
           <td>
-            <%= l(event.starts_at, format: :short) %>
+            <%= l(event.starts_at, format: :long) %>
           </td>
           <td>
             <% if event.first_location %>
@@ -96,12 +96,14 @@
     </tbody>
   </table>
 
+  <%= paginate @events, param_name: :events_page, remote: true, params: { archived_events_page: nil } %>
+
   <% unless @archived_events.empty? %>
     <div class="m_v_1 right">
       <%= link_to t("gobierto_admin.shared.archive.elements"), 'javascript:;', data: { toggle: true} %>
     </div>
 
-    <div id="archived-list" style="display:none">
+    <div id="archived-list" style="<%= params[:archived_events_page] ? '' : 'display:none' %>">
       <table class="person-events-list">
         <thead>
           <tr>
@@ -126,7 +128,7 @@
                 <%= event.title %>
               </td>
               <td>
-                <%= l(event.starts_at, format: :short) %>
+                <%= l(event.starts_at, format: :long) %>
               </td>
               <td>
                 <% if event.first_location %>
@@ -148,12 +150,12 @@
           <% end %>
         </tbody>
       </table>
+
+      <%= paginate @archived_events, param_name: :archived_events_page, remote: true, params: { events_page: nil } %>
     </div>
   <% end %>
 </div>
 
 <%= javascript_tag do %>
-$('a[data-toggle]').on('click', function(e){
-  $("div#archived-list").toggle();
-});
+  window.GobiertoAdmin.gobierto_calendars_events_controller.index();
 <% end %>

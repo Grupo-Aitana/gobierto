@@ -15,6 +15,15 @@ window.GobiertoBudgets.InvoicesController = (function() {
 
       $(".sort-G[data-toggle=" + filter + "]").addClass('active');
 
+      // Hide table to show spinner
+      $tableHTML.addClass('hidden');
+      // document.querySelector('#invoices-filters').scrollIntoView({
+      //   behavior: 'smooth'
+      // });
+      $('html, body').animate({
+          scrollTop: $('#invoices-filters').offset().top
+        }, 500);
+
       getData(filter);
     });
 
@@ -53,8 +62,23 @@ window.GobiertoBudgets.InvoicesController = (function() {
 
         // Hide spinner
         $(".js-toggle-overlay").removeClass('is-active');
+        // Show table again
+        $tableHTML.removeClass('hidden');
 
         data = _.filter(csv, _callback(filter));
+
+        if (!data.length) {
+          alert(I18n.t('gobierto_budgets.invoices.show.filter_empty'));
+
+          // if there's no data, get all available filters and trigger a new one
+          let filters = [];
+          $('#invoices-filters button[data-toggle]').each(function() { filters.push($(this).attr('data-toggle')) });
+          let previousFilter = (filters.indexOf(filter) > 0) ? filters[filters.indexOf(filter) - 1] : alert('Any filter has data.')
+
+          // trigger another filter automatically
+          $('#invoices-filters button[data-toggle=' + previousFilter + ']').trigger('click');
+          return
+        }
 
         _r = {
           domain: [501, 1001, 5001, 10001, 15001],

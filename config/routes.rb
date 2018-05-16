@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "sidekiq/web"
+
 Rails.application.routes.draw do
   # The root page is kind of dynamic
   constraints GobiertoSiteConstraint.new do
@@ -82,7 +84,7 @@ Rails.application.routes.draw do
         collection do
           resource :people_sort, only: [:create], controller: "people/people_sort", path: :people_sort
         end
-        resources :person_events, only: [:index, :new, :create, :edit, :update], controller: "people/person_events", as: :events, path: :events
+        resources :person_events, only: [:new, :create, :edit, :update], controller: "people/person_events", as: :events, path: :events
         resources :person_statements, only: [:index, :new, :create, :edit, :update], controller: "people/person_statements", as: :statements, path: :statements
         resources :person_posts, only: [:index, :new, :create, :edit, :update], controller: "people/person_posts", as: :posts, path: :blog
       end
@@ -299,12 +301,12 @@ Rails.application.routes.draw do
       namespace :api do
         get "/categories" => "categories#index"
         get "/categories/:area/:kind" => "categories#index"
-        get "/data/widget/budget/:ine_code/:year/:code/:area/:kind" => "data#budget", as: :data_budget
-        get "/data/widget/budget_per_inhabitant/:ine_code/:year/:code/:area/:kind" => "data#budget_per_inhabitant", as: :data_budget_per_inhabitant
-        get "/data/lines/:ine_code/:year/:what" => "data#lines", as: :data_lines
-        get "/data/lines/budget_line/:ine_code/:year/:what/:kind/:code/:area" => "data#lines", as: :data_lines_budget_line
-        get "/data/widget/budget_execution_deviation/:ine_code/:year/:kind" => "data#budget_execution_deviation", as: :data_budget_execution_deviation
-        get "/data/widget/budget_execution_comparison/:ine_code/:year/:kind/:area" => "data#budget_execution_comparison", as: :data_budget_execution_comparison
+        get "/data/widget/budget/:organization_id/:year/:code/:area/:kind" => "data#budget", as: :data_budget
+        get "/data/widget/budget_per_inhabitant/:organization_id/:year/:code/:area/:kind" => "data#budget_per_inhabitant", as: :data_budget_per_inhabitant
+        get "/data/lines/:organization_id/:year/:what" => "data#lines", as: :data_lines
+        get "/data/lines/budget_line/:organization_id/:year/:what/:kind/:code/:area" => "data#lines", as: :data_lines_budget_line
+        get "/data/widget/budget_execution_deviation/:organization_id/:year/:kind" => "data#budget_execution_deviation", as: :data_budget_execution_deviation
+        get "/data/widget/budget_execution_comparison/:organization_id/:year/:kind/:area" => "data#budget_execution_comparison", as: :data_budget_execution_comparison
       end
     end
   end
@@ -320,8 +322,7 @@ Rails.application.routes.draw do
   namespace :gobierto_plans, path: "planes" do
     constraints GobiertoSiteConstraint.new do
       get "/" => "plan_types#index", as: :root
-      get ":slug" => "plan_types#show", as: :plans
-      get ":slug/:year" => "plan_types#show", as: :plan
+      get ":slug(/:year)" => "plan_types#show", as: :plan
     end
   end
 
@@ -410,4 +411,7 @@ Rails.application.routes.draw do
       get "/documento/:id" => 'attachment_documents#show', as: :document
     end
   end
+
+  # Sidekiq Web UI
+  mount Sidekiq::Web => "/sidekiq", as: :sidekiq_console
 end

@@ -12,6 +12,7 @@
  * *postgres*
  * *redis*
  * *elasticsearch*
+ * *node.js* and *yarn*
 
 ### Ruby
 
@@ -142,6 +143,21 @@ default: &default
   elastic_url: http://localhost:9200
 ```
 
+### Node.js and Yarn
+
+Node.js and Yarn are dependencies to run the javascript assets packer. Gobierto uses [Webpack](https://webpack.js.org/) to package javascripts.
+
+Recommended versions are:
+
+- Node.js >= 8.0
+- Yarn >= 1.1.0
+
+You can install both using Homebrew:
+
+```shell
+brew install nodejs yarn
+```
+
 ### Application configuration
 
 ```shell
@@ -225,7 +241,7 @@ Just follow the following steps:
 
 Now you can start using Gobierto:
 
-1. Start the server with `bin/rails s`
+1. Start the server with `bin/server`
 2. Go to http://madrid.gobierto.test to see a demo site
 3. Go to the administrator: http://madrid.gobierto.test/admin
 4. See [admin namespace](admin-namespace.md) for some admin credentials

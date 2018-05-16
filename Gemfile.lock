@@ -54,8 +54,8 @@ GEM
     akami (1.3.1)
       gyoku (>= 0.4.0)
       nokogiri
-    algoliasearch (1.19.1)
-      httpclient (~> 2.8.3)
+    algoliasearch (1.19.2)
+      httpclient (~> 2.8, >= 2.8.3)
       json (>= 1.5.1)
     algoliasearch-rails (1.20.4)
       algoliasearch (>= 1.17.0, < 2.0.0)
@@ -63,13 +63,13 @@ GEM
     ansi (1.5.0)
     arel (9.0.0)
     ast (2.4.0)
-    aws-sdk (2.11.27)
-      aws-sdk-resources (= 2.11.27)
-    aws-sdk-core (2.11.27)
+    aws-sdk (2.11.45)
+      aws-sdk-resources (= 2.11.45)
+    aws-sdk-core (2.11.45)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.11.27)
-      aws-sdk-core (= 2.11.27)
+    aws-sdk-resources (2.11.45)
+      aws-sdk-core (= 2.11.45)
     aws-ses (0.6.0)
       builder
       mail (> 2.2.5)
@@ -79,22 +79,22 @@ GEM
     aws_cf_signer (0.1.3)
     bcrypt (3.1.11)
     before_renders (0.2.0)
-    bootsnap (1.2.1)
+    bootsnap (1.3.0)
       msgpack (~> 1.0)
     bourbon (4.3.4)
       sass (~> 3.4)
       thor (~> 0.19)
     builder (3.2.3)
     byebug (10.0.2)
-    capybara (2.18.0)
+    capybara (3.1.0)
       addressable
       mini_mime (>= 0.1.3)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (>= 2.0, < 4.0)
-    capybara-email (2.5.0)
-      capybara (~> 2.4)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      xpath (~> 3.0)
+    capybara-email (3.0.1)
+      capybara (>= 2.4, < 4.0)
       mail
     case_transform (0.2)
       activesupport
@@ -113,7 +113,7 @@ GEM
       js_cookie_rails
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
-    crass (1.0.3)
+    crass (1.0.4)
     d3-rails (4.13.0)
       railties (>= 3.1)
     dalli (2.7.7)
@@ -122,6 +122,7 @@ GEM
     docile (1.3.0)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (0.7.0)
     easy_translate (0.5.1)
       thread
       thread_safe
@@ -153,9 +154,12 @@ GEM
     flight-for-rails (1.5.1)
       jquery-rails (>= 2.1.4)
       rails (>= 3.1.0)
+    foreman (0.64.0)
+      dotenv (~> 0.7.0)
+      thor (>= 0.13.6)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    google-api-client (0.20.0)
+    google-api-client (0.20.1)
       addressable (~> 2.5, >= 2.5.1)
       googleauth (>= 0.5, < 0.7.0)
       httpclient (>= 2.8.1, < 3.0)
@@ -180,7 +184,7 @@ GEM
     httpi (2.4.3)
       rack
       socksify
-    i18n (1.0.0)
+    i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     i18n-js (3.0.5)
       i18n (>= 0.6.6, < 2)
@@ -201,8 +205,8 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
-    jmespath (1.3.1)
-    jquery-rails (4.3.1)
+    jmespath (1.4.0)
+    jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
@@ -278,7 +282,7 @@ GEM
       minitest (>= 5.0)
     minitest-stub-const (0.6)
     minitest-stub_any_instance (1.0.2)
-    mocha (1.4.0)
+    mocha (1.5.0)
       metaclass (~> 0.0.1)
     msgpack (1.2.4)
     multi_json (1.13.1)
@@ -293,24 +297,24 @@ GEM
     ntlm-http (0.1.1)
     oj (3.5.0)
     os (0.9.6)
-    paper_trail (9.0.0)
+    paper_trail (9.0.1)
       activerecord (>= 4.2, < 5.3)
       request_store (~> 1.1)
     parallel (1.12.1)
-    paranoia (2.4.0)
-      activerecord (>= 4.0, < 5.2)
-    parser (2.5.0.5)
+    paranoia (2.4.1)
+      activerecord (>= 4.0, < 5.3)
+    parser (2.5.1.0)
       ast (~> 2.4.0)
     patron (0.12.1)
     pg (0.21.0)
-    poltergeist (1.17.0)
-      capybara (~> 2.1)
+    poltergeist (1.18.0)
+      capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
     powerpack (0.1.1)
     public_suffix (3.0.2)
-    puma (3.11.3)
-    rack (2.0.4)
+    puma (3.11.4)
+    rack (2.0.5)
     rack-protection (2.0.1)
       rack
     rack-proxy (0.6.4)
@@ -363,9 +367,9 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     retriable (3.1.1)
-    rollbar (2.15.5)
+    rollbar (2.15.6)
       multi_json
-    rubocop (0.54.0)
+    rubocop (0.55.0)
       parallel (~> 1.10)
       parser (>= 2.5)
       powerpack (~> 0.1)
@@ -403,6 +407,8 @@ GEM
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
+    sidekiq-monitor-stats (0.0.2)
+      sidekiq
     signet (0.8.1)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -439,13 +445,13 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.8)
     timecop (0.9.1)
-    turbolinks (5.1.0)
+    turbolinks (5.1.1)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uber (0.1.0)
-    uglifier (4.1.8)
+    uglifier (4.1.10)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
@@ -456,11 +462,11 @@ GEM
     wasabi (3.5.0)
       httpi (~> 2.0)
       nokogiri (>= 1.4.2)
-    webmock (3.3.0)
+    webmock (3.4.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
-    webpacker (3.4.1)
+    webpacker (3.5.3)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
       railties (>= 4.2)
@@ -498,6 +504,7 @@ DEPENDENCIES
   elasticsearch-extensions
   exchanger
   flight-for-rails
+  foreman
   google-api-client
   i18n-js (>= 3.0.0.rc11)
   i18n-tasks
@@ -520,11 +527,11 @@ DEPENDENCIES
   minitest-stub_any_instance
   mocha
   paper_trail
-  paranoia
+  paranoia (~> 2.4.0)
   pg (~> 0.19)
   poltergeist
   puma
-  rails (~> 5.2.0.rc2)
+  rails (~> 5.2.0)
   rails-html-sanitizer
   redcarpet
   redis (~> 3.3)
@@ -535,6 +542,7 @@ DEPENDENCIES
   sass-rails (~> 5.0.0)
   savon (~> 2.11.1)
   sidekiq (~> 5.1.0)
+  sidekiq-monitor-stats
   simple_calendar (~> 2.2)
   spring
   spring-watcher-listen (~> 2.0.0)

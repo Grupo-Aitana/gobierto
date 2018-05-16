@@ -6,11 +6,20 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from ActionController::RoutingError, with: :render_404
   rescue_from ActionController::UnknownFormat, with: :render_404
 
-  helper_method :helpers, :load_current_module_sub_sections, :current_site, :current_module,
-                :available_locales, :gobierto_calendars_event_preview_url
+  helper_method(
+    :helpers,
+    :load_current_module_sub_sections,
+    :current_site,
+    :current_module,
+    :current_module_class,
+    :available_locales,
+    :gobierto_calendars_event_preview_url,
+    :algoliasearch_configured?
+  )
 
   before_action :set_current_site, :authenticate_user_in_site, :set_locale
 
@@ -46,6 +55,10 @@ class ApplicationController < ActionController::Base
                         end
   end
 
+  def current_module_class
+    @current_module_class ||= current_module&.camelize&.constantize
+  end
+
   def set_current_site
     @site = current_site
   end
@@ -76,6 +89,10 @@ class ApplicationController < ActionController::Base
                            else
                              I18n.available_locales
                            end
+  end
+
+  def algoliasearch_configured?
+    ::GobiertoCommon::Search.algoliasearch_configured?
   end
 
   protected

@@ -3,6 +3,7 @@ module GobiertoBudgets
 
     def external_comparison_link
       municipalities = budgets_comparison_compare_municipalities.map{ |place_id| INE::Places::Place.find(place_id) } + [current_site.place]
+      municipalities.compact!
       year = @year || GobiertoBudgets::SearchEngineConfiguration::Year.last
 
       budget_line_path = if params[:id]
@@ -129,9 +130,7 @@ module GobiertoBudgets
     end
 
     def bubbles_data_path(site)
-      path = GobiertoBudgets::Data::Bubbles.file_name_for(site.organization_id)
-
-      "https://#{ENV['S3_BUCKET_NAME']}.s3-eu-west-1.amazonaws.com/#{path}"
+      GobiertoBudgets::Data::Bubbles.new(current_site).file_url
     end
 
     def budget_line_breadcrumb(budget_line, year, kind)
