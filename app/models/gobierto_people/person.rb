@@ -18,8 +18,6 @@ module GobiertoPeople
       add_attribute :resource_path, :class_name
     end
 
-    metadata_attributes :events_invitations_count
-
     belongs_to :admin, class_name: "GobiertoAdmin::Admin"
     belongs_to :site
     belongs_to :political_group
