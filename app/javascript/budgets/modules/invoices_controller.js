@@ -7,7 +7,34 @@ window.GobiertoBudgets.InvoicesController = (function() {
 
   InvoicesController.prototype.show = function() {
 
-    $('#invoices-filters button').on('click', function (e) {
+    let municipalityId = window.populateData.municipalityId;
+    let maxYearUrl = window.populateData.endpoint + '/datasets/ds-facturas-municipio.csv?filter_by_location_id='+municipalityId+'&sort_desc_by=date&limit=1';
+    let minYearUrl = window.populateData.endpoint + '/datasets/ds-facturas-municipio.csv?filter_by_location_id='+municipalityId+'&sort_asc_by=date&limit=1';
+
+    // Get the dates
+    let getYear = function (url) {
+      return new Promise((resolve) => {
+        d3.csv(url)
+          .header('authorization', 'Bearer ' + window.populateData.token)
+          .get(function(error, csv) {
+            if (error) throw error;
+
+            resolve(moment(_.map(csv, 'date')[0]).year())
+          });
+      })
+    }
+
+    // Insert the buttons to the DOM
+    Promise.all([getYear(maxYearUrl), getYear(minYearUrl)]).then((range) => {
+      const $dropdownContent = $('[data-dropdown]:not(.js-dropdown)')
+      for (var i = range[0]; i >= range[1]; i--) {
+        $('<button class="button-grouped button-compact sort-G" data-toggle="' + i + '">' + i + '</button>').appendTo($dropdownContent).bind('click', btnOnClick);
+        $('\n').appendTo($dropdownContent);
+      }
+    })
+
+    // Click event handler
+    let btnOnClick = function(e) {
       var filter = $(e.target).attr('data-toggle');
 
       // Reset all buttons
@@ -21,11 +48,13 @@ window.GobiertoBudgets.InvoicesController = (function() {
       //   behavior: 'smooth'
       // });
       $('html, body').animate({
-          scrollTop: $('#invoices-filters').offset().top
-        }, 500);
+        scrollTop: $('#invoices-filters').offset().top
+      }, 500);
 
       getData(filter);
-    });
+    }
+
+    $('#invoices-filters .sort-G').on('click', btnOnClick);
 
     getData('3m');
   };
@@ -74,7 +103,7 @@ window.GobiertoBudgets.InvoicesController = (function() {
           // if there's no data, get all available filters and trigger a new one
           let filters = [];
           $('#invoices-filters button[data-toggle]').each(function() { filters.push($(this).attr('data-toggle')) });
-          let previousFilter = (filters.indexOf(filter) > 0) ? filters[filters.indexOf(filter) - 1] : alert('Any filter has data.')
+          let previousFilter = (filters.indexOf(filter) > 0) ? filters[filters.indexOf(filter) - 1] : alert(I18n.t('gobierto_budgets.invoices.show.empty'))
 
           // trigger another filter automatically
           $('#invoices-filters button[data-toggle=' + previousFilter + ']').trigger('click');
