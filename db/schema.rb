@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_21_153203) do
+ActiveRecord::Schema.define(version: 2018_05_22_082718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -332,6 +332,7 @@ ActiveRecord::Schema.define(version: 2018_05_21_153203) do
     t.index ["department_id"], name: "index_gc_events_on_department_id"
     t.index ["description_source_translations"], name: "index_gc_events_on_description_source_translations", using: :gin
     t.index ["description_translations"], name: "index_gc_events_on_description_translations", using: :gin
+    t.index ["meta"], name: "index_gc_events_on_meta", using: :gin
     t.index ["site_id", "slug"], name: "index_gc_events_on_site_id_and_slug", unique: true
     t.index ["title_translations"], name: "index_gc_events_on_title_translations", using: :gin
   end
@@ -440,7 +441,9 @@ ActiveRecord::Schema.define(version: 2018_05_21_153203) do
     t.jsonb "meta"
     t.date "date", null: false
     t.bigint "department_id"
+    t.string "external_id"
     t.index ["department_id"], name: "index_gp_gifts_on_department_id"
+    t.index ["meta"], name: "index_gp_gifts_on_meta", using: :gin
     t.index ["person_id"], name: "index_gp_gifts_on_person_id"
   end
 
@@ -448,6 +451,7 @@ ActiveRecord::Schema.define(version: 2018_05_21_153203) do
     t.bigint "site_id", null: false
     t.string "name", null: false
     t.jsonb "meta"
+    t.index ["meta"], name: "index_gp_interest_groups_on_meta", using: :gin
     t.index ["site_id"], name: "index_gp_interest_groups_on_site_id"
   end
 
@@ -455,12 +459,15 @@ ActiveRecord::Schema.define(version: 2018_05_21_153203) do
     t.bigint "person_id", null: false
     t.string "organizer", null: false
     t.string "title", null: false
-    t.string "location"
     t.date "start_date", null: false
     t.date "end_date", null: false
     t.jsonb "meta"
     t.bigint "department_id"
+    t.jsonb "location"
+    t.string "external_id"
     t.index ["department_id"], name: "index_gp_invitations_on_department_id"
+    t.index ["location"], name: "index_gp_invitations_on_location", using: :gin
+    t.index ["meta"], name: "index_gp_invitations_on_meta", using: :gin
     t.index ["person_id"], name: "index_gp_invitations_on_person_id"
   end
 
@@ -562,7 +569,10 @@ ActiveRecord::Schema.define(version: 2018_05_21_153203) do
     t.jsonb "destinations_meta"
     t.jsonb "meta"
     t.bigint "department_id"
+    t.string "external_id"
     t.index ["department_id"], name: "index_gp_trips_on_department_id"
+    t.index ["destinations_meta"], name: "index_gp_trips_on_destinations_meta", using: :gin
+    t.index ["meta"], name: "index_gp_trips_on_meta", using: :gin
     t.index ["person_id"], name: "index_gp_trips_on_person_id"
   end
 
