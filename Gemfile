@@ -88,6 +88,9 @@ gem "savon", "~> 2.11.1"
 # Image management
 gem "cloudinary"
 
+# Gobierto data
+gem "gobierto_data", git: "https://github.com/PopulateTools/gobierto_data.git"
+
 group :development, :test do
   gem "byebug", platform: :mri
   gem "i18n-tasks"
