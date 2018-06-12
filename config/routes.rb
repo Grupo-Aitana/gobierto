@@ -274,6 +274,13 @@ Rails.application.routes.draw do
         end
         resource :google_calendar_calendars, only: [:edit, :update], controller: "people/google_calendar/calendars", as: :google_calendar_calendars
       end
+
+      # API
+      namespace :api, path: "gobierto_people/api" do
+        namespace :v1 do
+          resources :interest_groups, only: :index
+        end
+      end
     end
 
     # Google calendar integration hook
