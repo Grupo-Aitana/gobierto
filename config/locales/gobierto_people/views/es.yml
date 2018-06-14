@@ -6,7 +6,7 @@ es:
         events: reuniones registradas
         events_by_department: Reuniones por departamentos
         events_by_department_and_month: Reuniones por departamento y mes
-        people_by_department: Altos cargos con reuniones por departamento
+        people_events: Altos cargos con más reuniones
         people_with_events: altos cargos con reuniones registradas
       show:
         events: reuniones registradas

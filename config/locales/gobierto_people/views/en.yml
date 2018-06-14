@@ -6,7 +6,7 @@ en:
         events: registered events
         events_by_department: Events by departments
         events_by_department_and_month: Events by departments and month
-        people_by_department: Officials with events by department
+        people_events: Officials with most meetings
         people_with_events: officials with registered events
       show:
         events: registered events
