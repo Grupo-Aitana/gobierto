@@ -1,22 +1,15 @@
 module GobiertoPeople
   class TripDecorator < BaseDecorator
 
-    def initialize(person)
-      @object = person
+    CASE_CHANGE_REGEXP = /(?<=[a-z])(?=[A-Z])/
+    SPLIT_COMPANY_REGEXP = /\n|,|#{CASE_CHANGE_REGEXP}/
+
+    def initialize(trip)
+      @object = trip
     end
 
     def company_members
-      company.split(/\n|,/).map(&:strip).uniq
-    end
-
-    def expenses
-      [
-        { kind: "Dietes i manutenció", amount: food_expenses },
-        { kind: "Hotels i allotjament", amount: accomodation_expenses },
-        { kind: "Transport", amount: transport_expenses },
-        { kind: "Altres despeses", amount: other_expenses },
-        { kind: "Total despeses", amount: total_expenses }
-      ]
+      company.split(SPLIT_COMPANY_REGEXP).map(&:strip).uniq
     end
 
     def formatted_start_date
