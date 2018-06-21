@@ -201,7 +201,7 @@ GEM
       socksify
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
-    i18n-js (3.0.8)
+    i18n-js (3.0.9)
       i18n (>= 0.6.6, < 2)
     i18n-tasks (0.9.21)
       activesupport (>= 4.0.2)
@@ -472,7 +472,7 @@ GEM
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uber (0.1.0)
-    uglifier (4.1.11)
+    uglifier (4.1.12)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
