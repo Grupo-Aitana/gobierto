@@ -5,6 +5,8 @@ module GobiertoPeople
     module V1
       class PeopleController < Api::V1::BaseController
 
+        before_action :check_active_submodules
+
         def index
           top_people = PeopleQuery.new(
             relation: current_site.people,
@@ -82,6 +84,10 @@ module GobiertoPeople
             start_date: Time.zone.parse(year_month).to_date.to_s(:db),
             end_date: (Time.zone.parse(year_month).to_date + 1.month).to_s(:db)
           }
+        end
+
+        def check_active_submodules
+          head :forbidden unless agendas_submodule_active?
         end
 
       end

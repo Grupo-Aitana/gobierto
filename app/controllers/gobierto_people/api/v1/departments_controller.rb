@@ -5,6 +5,8 @@ module GobiertoPeople
     module V1
       class DepartmentsController < Api::V1::BaseController
 
+        before_action :check_active_submodules
+
         def index
           top_departments = DepartmentsQuery.new(
             relation: Department.where(site: current_site),
@@ -87,6 +89,10 @@ module GobiertoPeople
             start_date: Time.zone.parse(year_month).to_date.to_s(:db),
             end_date: (Time.zone.parse(year_month).to_date + 1.month).to_s(:db)
           }
+        end
+
+        def check_active_submodules
+          head :forbidden unless departments_submodule_active?
         end
 
       end
