@@ -10,9 +10,13 @@ module GobiertoPeople
           @events = @person.events.by_date(@filtering_date).sorted.page params[:page]
         elsif params[:page] == "false"
           # permit non-pagination and avoid N+1 queries for custom engines
-          @events = @person.events.past.sorted_backwards.includes(:interest_group)
+          @events = QueryWithEvents.new(source: @person.events,
+                                        start_date: filter_start_date,
+                                        end_date: filter_end_date).past.sorted_backwards.includes(:interest_group)
         else
-          @events = @person.events.past.sorted.page params[:page]
+          @events = QueryWithEvents.new(source: @person.events,
+                                        start_date: filter_start_date,
+                                        end_date: filter_end_date).upcoming.sorted.page params[:page]
         end
 
         respond_to do |format|
