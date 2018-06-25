@@ -15,6 +15,7 @@ export const rowchart = (context, data, options = {}) => {
   }
   let xTickFormat = options.xTickFormat || (d => d)
   let yTickFormat = options.yTickFormat || (d => d)
+  let tooltipContainer = options.tooltipContainer || "body"
 
   // dimensions
   let container = d3.select(context)
@@ -25,7 +26,7 @@ export const rowchart = (context, data, options = {}) => {
     .attr("height", height + margin.top + margin.bottom)
 
   // tooltip
-  let tooltip = container.append("div")
+  let tooltip = d3.select(tooltipContainer).append("div")
     .attr("id", `${container.node().id}-tooltip`)
     .attr("class", "graph-tooltip")
 
@@ -56,10 +57,15 @@ export const rowchart = (context, data, options = {}) => {
           ${d.value.toLocaleString()}
         </div>`
 
+      let coords = {
+        x: window.pageXOffset + container.node().getBoundingClientRect().left,
+        y: window.pageYOffset + container.node().getBoundingClientRect().top
+      }
+
       tooltip
         .style("opacity", "1")
-        .style("left", `${x(d.value) + margin.left }px`)
-        .style("top", `${y(d.key) + (itemHeight / 2)}px`)
+        .style("left", `${coords.x + x(d.value) + margin.left }px`)
+        .style("top", `${coords.y + y(d.key) + (itemHeight / 2)}px`)
         .html(content);
     })
     .on("mouseout", () => tooltip.style("opacity", "0"))
