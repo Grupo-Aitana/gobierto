@@ -32,7 +32,7 @@ module GobiertoPeople
                   key: record.name,
                   value: [record_value_item(record)],
                   properties: {
-                    url: gobierto_people_person_past_events_path(record.slug, page: false)
+                    url: gobierto_people_person_past_events_url(record.slug, page: false)
                   }
                 }
               end
@@ -69,13 +69,17 @@ module GobiertoPeople
           ).to_h
         end
 
+        def check_active_submodules
+          head :forbidden unless agendas_submodule_active?
+        end
+
         def record_value_item(record)
           year_month = Time.zone.parse(record.year_month)
           {
             key: year_month,
             value: record.custom_events_count,
             properties: {
-              url: gobierto_people_person_past_events_path(
+              url: gobierto_people_person_past_events_url(
                 record.slug,
                 page: false,
                 start_date: year_month.to_date.to_s(:db),
@@ -83,10 +87,6 @@ module GobiertoPeople
               )
             }
           }
-        end
-
-        def check_active_submodules
-          head :forbidden unless agendas_submodule_active?
         end
 
       end

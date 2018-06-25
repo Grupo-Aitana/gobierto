@@ -84,15 +84,15 @@ module GobiertoPeople
           ).to_h
         end
 
+        def check_active_submodules
+          head :forbidden unless departments_submodule_active?
+        end
+
         def date_range(year_month)
           {
             start_date: Time.zone.parse(year_month).to_date.to_s(:db),
             end_date: (Time.zone.parse(year_month).to_date + 1.month).to_s(:db)
           }
-        end
-
-        def check_active_submodules
-          head :forbidden unless departments_submodule_active?
         end
 
       end
